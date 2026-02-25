@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="fr" class="bg-halftone bg-mha">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Accueil | ULTRA RUMBLE Guide</title>
+  <meta name="description" content="Guide fan-made pour MY HERO ULTRA RUMBLE : roster, tuning, guides, meta.">
+  <meta name="theme-color" content="#0b1020">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body >
+<header class="header">
+  <a class="skip" href="#main">Aller au contenu</a>
+  <nav class="navbar" aria-label="Navigation principale">
+    <a class="brand" href="index.html">
+      <span class="brand-logo" aria-hidden="true"></span>
+      <span class="brand-title">
+        <strong>ULTRA RUMBLE</strong>
+        <span>Guide T.U.N.I.N.G • vibes comics</span>
+      </span>
+    </a>
+
+    <div class="navlinks" role="navigation">
+      <a href="index.html">Accueil</a>
+      <a href="roster/index.html">Personnages</a>
+      <a href="tuning/index.html">Tuning</a>
+      <a href="guides/index.html">Guides</a>
+      <a href="meta/index.html">Meta</a>
+      <a href="resources/index.html">Ressources</a>
+      <a href="contact/index.html">Contact</a>
+    </div>
+
+    <div class="nav-actions">
+      <button class="iconbtn burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false" type="button">☰</button>
+      <button class="iconbtn" id="themeToggle" aria-label="Changer le thème" type="button">◐</button>
+      <a class="iconbtn" href="roster/index.html" aria-label="Recherche personnages">⌕</a>
+    </div>
+  </nav>
+
+  <div class="mobile-drawer" id="drawer">
+    <div class="container">
+      <a href="index.html">Accueil</a>
+      <a href="roster/index.html">Personnages</a>
+      <a href="tuning/index.html">Tuning</a>
+      <a href="guides/index.html">Guides</a>
+      <a href="meta/index.html">Meta</a>
+      <a href="resources/index.html">Ressources</a>
+      <a href="contact/index.html">Contact</a>
+    </div>
+  </div>
+</header>
+<main id="main" class="container">
+
+<section class="hero">
+  <div class="panel hero-card cut stack">
+    <div class="hero-burst" aria-hidden="true"></div>
+    <div class="kicker">Briefing d’agence</div>
+    <h1 class="h1">Ton guide <span style="color:var(--hero)">MY HERO ULTRA RUMBLE</span> version comics</h1>
+    <div class="speech">
+      <strong>Objectif :</strong> trouver un perso → choisir une variante → appliquer un build T.U.N.I.N.G. sans te perdre.
+      <div class="small" style="margin-top:6px">📌 Les builds détaillés se branchent depuis tes fichiers (CSV/Sheets) : le site est prêt pour ça.</div>
+    </div>
+
+    <form id="homeSearchForm" class="searchbar" role="search" aria-label="Rechercher un personnage">
+      <input id="homeSearch" class="input" type="search" placeholder="Cherche un perso… (ex: Midoriya, Toga, Hawks)" autocomplete="off">
+      <button class="btn" type="submit">GO !</button>
+    </form>
+
+    <div style="display:flex; gap:12px; flex-wrap:wrap">
+      <a class="btn secondary" href="roster/index.html">Ouvrir le roster</a>
+      <a class="btn secondary" href="tuning/index.html">Générateur de tuning</a>
+      <a class="btn ghost" href="guides/index.html">Guides UA</a>
+    </div>
+  </div>
+
+  <div class="panel stack">
+    <div class="kicker">Sources officielles</div>
+
+    <div class="speech">
+      <div style="font-weight:1000">Site officiel (EU)</div>
+      <div class="small">Page du jeu + actus (Bandai Namco Entertainment Europe).</div>
+      <a class="btn secondary" href="https://en.bandainamcoent.eu/my-hero-academia/my-hero-ultra-rumble" target="_blank" rel="noopener">Ouvrir</a>
+    </div>
+
+    <div class="speech">
+      <div style="font-weight:1000">News / patch notes (US)</div>
+      <div class="small">Liste des news (patch notes, maintenances, dev blogs).</div>
+      <a class="btn secondary" href="https://www.bandainamcoent.com/games/my-hero-ultra-rumble/news" target="_blank" rel="noopener">Ouvrir</a>
+    </div>
+
+    <div class="speech">
+      <div style="font-weight:1000">Site officiel (JP)</div>
+      <div class="small">Infos et mises à jour en japonais.</div>
+      <a class="btn secondary" href="https://mhaur.bn-ent.net/" target="_blank" rel="noopener">Ouvrir</a>
+    </div>
+
+    <div class="notice">
+      <strong>Rappel :</strong>
+      <div class="small" style="margin-top:6px">
+        Les règles, bonus et tunings peuvent changer selon les mises à jour.
+        Ce guide est “fan-made” : utilise ces liens pour vérifier l’info officielle.
+      </div>
+    </div>
+  </div>
+</section>
+<section class="panel cut stack" style="margin-top:18px">
+  <div class="kicker">Roster express</div>
+  <h2 class="h2" style="margin:0">Choisis ton perso</h2>
+  <p class="p">Les cartes ci-dessous sont générées depuis <span class="mono">TUNING ULTRA RUMBLE - HOME.csv</span> (déjà intégré au site).</p>
+
+  <div class="grid grid-3" id="homeRoster" aria-live="polite"></div>
+
+  <div class="small">
+    Si ton navigateur bloque les images distantes, tu verras quand même un fond “comics”.
+    (Les portraits tentent de se charger depuis la base de données non officielle <span class="mono">ultrarumble.com</span>.)
+  </div>
+
+  <div style="display:flex; gap:10px; flex-wrap:wrap;">
+    <a class="btn secondary" href="roster/index.html">Voir tout le roster</a>
+    <a class="btn ghost" href="tuning/index.html">Aller au tuning</a>
+  </div>
+</section>
+
+
+<section class="grid grid-3" style="margin-top:18px">
+  <article class="panel card">
+    <div class="kicker">1) Choisis ton héros</div>
+    <h2 class="h2">Roster</h2>
+    <p class="p">Recherche + filtres par variantes (J/R/B/V) comme dans ton fichier HOME.</p>
+    <a class="btn secondary" href="roster/index.html">Explorer</a>
+  </article>
+
+  <article class="panel card">
+    <div class="kicker">2) Régle l’équipement</div>
+    <h2 class="h2">T.U.N.I.N.G</h2>
+    <p class="p">Un générateur prêt à charger tes builds JSON, avec copie & export PNG.</p>
+    <a class="btn secondary" href="tuning/index.html">Ouvrir</a>
+  </article>
+
+  <article class="panel card">
+    <div class="kicker">3) Monte en niveau</div>
+    <h2 class="h2">Guides UA</h2>
+    <p class="p">Débuter, teamplay, mouvement, ranked, glossaire — à compléter avec ton style.</p>
+    <a class="btn secondary" href="guides/index.html">Lire</a>
+  </article>
+</section>
+
+<section class="panel stack" style="margin-top:18px">
+  <div class="kicker">Brancher TES tunings</div>
+  <h2 class="h2">Comment ajouter tes builds (2 minutes)</h2>
+  <ol style="margin:0; padding-left:18px">
+    <li>Ouvre <span class="mono">assets/data/tuning/example.json</span> pour voir le format.</li>
+    <li>Crée un fichier <span class="mono">assets/data/tuning/&lt;variantId&gt;.json</span> (ex: <span class="mono">midoriya-j.json</span>).</li>
+    <li>Recharge : la fiche perso et le générateur afficheront ton build automatiquement.</li>
+  </ol>
+  <div class="notice">
+    <strong>Je ne peux pas confirmer le contenu de tes tunings</strong>
+    <div class="small" style="margin-top:6px">
+      Le fichier HOME fourni ne contient pas les réglages détaillés (slots/skills/niveaux). Le site est prêt, mais il faut injecter tes données de tuning.
+    </div>
+  </div>
+</section>
+
+</main>
+<footer class="footer">
+  <div class="container grid grid-3">
+    <div class="stack">
+      <div class="kicker">PLUS ULTRA, mais clair</div>
+      <div class="small">
+        Site vitrine/guide créé à partir de ton fichier <span class="mono">TUNING ULTRA RUMBLE - HOME.csv</span>.
+        Les builds T.U.N.I.N.G détaillés se branchent via des fichiers JSON dans <span class="mono">assets/data/tuning/</span>.
+      </div>
+      <div class="small">
+        <strong>Disclaimer :</strong> site non officiel, non affilié à Bandai Namco / Byking / détenteurs de droits.
+      </div>
+    </div>
+
+    <div class="stack">
+      <div class="kicker">Navigation</div>
+      <a href="roster/index.html">Personnages</a>
+      <a href="tuning/index.html">Générateur de tuning</a>
+      <a href="meta/index.html">Meta & patch notes</a>
+      <a href="resources/index.html">Ressources</a>
+    </div>
+
+    <div class="stack">
+      <div class="kicker">Deploy</div>
+      <div class="small">
+        Héberge ce dossier sur GitHub Pages / Netlify / Vercel.
+        Pour tester en local : <span class="mono">python -m http.server</span>
+      </div>
+      <a class="btn secondary" href="about/index.html">À propos</a>
+    </div>
+  </div>
+  <div class="toast" id="toast" aria-live="polite" aria-atomic="true">
+    <div class="panel"><span class="toast-msg">OK</span></div>
+  </div>
+</footer>
+<script src="assets/js/app.js"></script>
+<script src="assets/js/home.js"></script>
+</body>
+</html>
