@@ -37,9 +37,36 @@
   window.URM.toast = toast;
 
   window.URM.fetchJSON = async (url) => {
-    const res = await fetch(url, { cache: "no-cache" });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    return await res.json();
+    const clean = (u) => (u || "").toString().split("#")[0].split("?")[0];
+
+    const fromInline = (u) => {
+      const pack = window.URM_INLINE;
+      if (!pack) return null;
+      const p = clean(u);
+
+      if (p.endsWith("assets/data/roster.json")) return pack.roster || null;
+      if (p.endsWith("assets/data/site.json")) return pack.site || null;
+      if (p.endsWith("assets/data/urm-character-map.json")) return pack.urmCharacterMap || null;
+
+      let m = p.match(/assets\/data\/content\/([^\/]+)\.json$/);
+      if (m) return (pack.content && pack.content[m[1]]) ? pack.content[m[1]] : null;
+
+      m = p.match(/assets\/data\/tuning\/([^\/]+)\.json$/);
+      if (m) return (pack.tuning && pack.tuning[m[1]]) ? pack.tuning[m[1]] : null;
+
+      return null;
+    };
+
+    // Try network/file fetch first (works on server/http).
+    try {
+      const res = await fetch(url, { cache: "no-cache" });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      return await res.json();
+    } catch (e) {
+      const inline = fromInline(url);
+      if (inline !== null) return inline;
+      throw e;
+    }
   };
 
   const initNav = () => {
