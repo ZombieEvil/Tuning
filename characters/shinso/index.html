@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="fr" class="bg-halftone bg-mha">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SHINSO | ULTRA RUMBLE Guide</title>
+  <meta name="description" content="Guide fan-made pour MY HERO ULTRA RUMBLE : roster, tuning, guides, meta.">
+  <meta name="theme-color" content="#0b1020">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+</head>
+<body data-base="shinso">
+<header class="header">
+  <a class="skip" href="#main">Aller au contenu</a>
+  <nav class="navbar" aria-label="Navigation principale">
+    <a class="brand" href="../../index.html">
+      <span class="brand-logo" aria-hidden="true"></span>
+      <span class="brand-title">
+        <strong>ULTRA RUMBLE</strong>
+        <span>Guide T.U.N.I.N.G • vibes comics</span>
+      </span>
+    </a>
+
+    <div class="navlinks" role="navigation">
+      <a href="../../index.html">Accueil</a>
+      <a href="../../roster/index.html">Personnages</a>
+      <a href="../../tuning/index.html">Tuning</a>
+      <a href="../../guides/index.html">Guides</a>
+      <a href="../../meta/index.html">Meta</a>
+      <a href="../../resources/index.html">Ressources</a>
+      <a href="../../contact/index.html">Contact</a>
+    </div>
+
+    <div class="nav-actions">
+      <button class="iconbtn burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false" type="button">☰</button>
+      <button class="iconbtn" id="themeToggle" aria-label="Changer le thème" type="button">◐</button>
+      <a class="iconbtn" href="../../roster/index.html" aria-label="Recherche personnages">⌕</a>
+    </div>
+  </nav>
+
+  <div class="mobile-drawer" id="drawer">
+    <div class="container">
+      <a href="../../index.html">Accueil</a>
+      <a href="../../roster/index.html">Personnages</a>
+      <a href="../../tuning/index.html">Tuning</a>
+      <a href="../../guides/index.html">Guides</a>
+      <a href="../../meta/index.html">Meta</a>
+      <a href="../../resources/index.html">Ressources</a>
+      <a href="../../contact/index.html">Contact</a>
+    </div>
+  </div>
+</header>
+<main id="main" class="container">
+
+<nav class="small" id="breadcrumb" aria-label="Fil d’Ariane"></nav>
+<div id="pageError"></div>
+<div id="variantPanel" class="stack" style="margin-top:14px"></div>
+
+<section class="panel stack" style="margin-top:18px">
+  <div class="kicker">Mode éditeur</div>
+  <div class="small">
+    Pour modifier le texte de cette fiche : <span class="mono">assets/data/content/shinso.json</span><br>
+    Pour ajouter un build : <span class="mono">assets/data/tuning/&lt;variantId&gt;.json</span>
+  </div>
+</section>
+
+</main>
+<footer class="footer">
+  <div class="container grid grid-3">
+    <div class="stack">
+      <div class="kicker">PLUS ULTRA, mais clair</div>
+      <div class="small">
+        Site vitrine/guide créé à partir de ton fichier <span class="mono">TUNING ULTRA RUMBLE - HOME.csv</span>.
+        Les builds T.U.N.I.N.G détaillés se branchent via des fichiers JSON dans <span class="mono">assets/data/tuning/</span>.
+      </div>
+      <div class="small">
+        <strong>Disclaimer :</strong> site non officiel, non affilié à Bandai Namco / Byking / détenteurs de droits.
+      </div>
+    </div>
+
+    <div class="stack">
+      <div class="kicker">Navigation</div>
+      <a href="../../roster/index.html">Personnages</a>
+      <a href="../../tuning/index.html">Générateur de tuning</a>
+      <a href="../../meta/index.html">Meta & patch notes</a>
+      <a href="../../resources/index.html">Ressources</a>
+    </div>
+
+    <div class="stack">
+      <div class="kicker">Deploy</div>
+      <div class="small">
+        Héberge ce dossier sur GitHub Pages / Netlify / Vercel.
+        Pour tester en local : <span class="mono">python -m http.server</span>
+      </div>
+      <a class="btn secondary" href="../../about/index.html">À propos</a>
+    </div>
+  </div>
+  <div class="toast" id="toast" aria-live="polite" aria-atomic="true">
+    <div class="panel"><span class="toast-msg">OK</span></div>
+  </div>
+</footer>
+<script src="../../assets/js/app.js"></script>
+<script src="../../assets/js/character.js"></script>
+</body>
+</html>

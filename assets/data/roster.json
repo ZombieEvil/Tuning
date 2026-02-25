@@ -1,0 +1,598 @@
+{
+  "variantTokens": [
+    "J",
+    "R",
+    "B",
+    "V"
+  ],
+  "variantMeaningNote": "Les lettres J/R/B/V viennent de ton fichier HOME. Leur signification exacte n’est pas fournie dans ce fichier, donc elles sont affichées comme des tags (à renseigner si besoin).",
+  "bases": [
+    {
+      "id": "afo-jeune",
+      "name": "AFO JEUNE",
+      "variants": [
+        {
+          "label": "AFO JEUNE",
+          "base": "AFO JEUNE",
+          "variant": null,
+          "base_id": "afo-jeune",
+          "id": "afo-jeune"
+        }
+      ]
+    },
+    {
+      "id": "aizawa",
+      "name": "AIZAWA",
+      "variants": [
+        {
+          "label": "AIZAWA",
+          "base": "AIZAWA",
+          "variant": null,
+          "base_id": "aizawa",
+          "id": "aizawa"
+        }
+      ]
+    },
+    {
+      "id": "all-for-one",
+      "name": "ALL FOR ONE",
+      "variants": [
+        {
+          "label": "ALL FOR ONE",
+          "base": "ALL FOR ONE",
+          "variant": null,
+          "base_id": "all-for-one",
+          "id": "all-for-one"
+        }
+      ]
+    },
+    {
+      "id": "armored",
+      "name": "ARMORED",
+      "variants": [
+        {
+          "label": "ARMORED",
+          "base": "ARMORED",
+          "variant": null,
+          "base_id": "armored",
+          "id": "armored"
+        }
+      ]
+    },
+    {
+      "id": "bakugo",
+      "name": "BAKUGO",
+      "variants": [
+        {
+          "label": "BAKUGO R",
+          "base": "BAKUGO",
+          "variant": "R",
+          "base_id": "bakugo",
+          "id": "bakugo-r"
+        },
+        {
+          "label": "BAKUGO B",
+          "base": "BAKUGO",
+          "variant": "B",
+          "base_id": "bakugo",
+          "id": "bakugo-b"
+        }
+      ]
+    },
+    {
+      "id": "cementos",
+      "name": "CEMENTOS",
+      "variants": [
+        {
+          "label": "CEMENTOS",
+          "base": "CEMENTOS",
+          "variant": null,
+          "base_id": "cementos",
+          "id": "cementos"
+        }
+      ]
+    },
+    {
+      "id": "dabi",
+      "name": "DABI",
+      "variants": [
+        {
+          "label": "DABI R",
+          "base": "DABI",
+          "variant": "R",
+          "base_id": "dabi",
+          "id": "dabi-r"
+        },
+        {
+          "label": "DABI V",
+          "base": "DABI",
+          "variant": "V",
+          "base_id": "dabi",
+          "id": "dabi-v"
+        }
+      ]
+    },
+    {
+      "id": "denki",
+      "name": "DENKI",
+      "variants": [
+        {
+          "label": "DENKI R",
+          "base": "DENKI",
+          "variant": "R",
+          "base_id": "denki",
+          "id": "denki-r"
+        },
+        {
+          "label": "DENKI V",
+          "base": "DENKI",
+          "variant": "V",
+          "base_id": "denki",
+          "id": "denki-v"
+        }
+      ]
+    },
+    {
+      "id": "endeavor",
+      "name": "ENDEAVOR",
+      "variants": [
+        {
+          "label": "ENDEAVOR J",
+          "base": "ENDEAVOR",
+          "variant": "J",
+          "base_id": "endeavor",
+          "id": "endeavor-j"
+        },
+        {
+          "label": "ENDEAVOR R",
+          "base": "ENDEAVOR",
+          "variant": "R",
+          "base_id": "endeavor",
+          "id": "endeavor-r"
+        }
+      ]
+    },
+    {
+      "id": "fumikage",
+      "name": "FUMIKAGE",
+      "variants": [
+        {
+          "label": "FUMIKAGE J",
+          "base": "FUMIKAGE",
+          "variant": "J",
+          "base_id": "fumikage",
+          "id": "fumikage-j"
+        }
+      ]
+    },
+    {
+      "id": "hawks",
+      "name": "HAWKS",
+      "variants": [
+        {
+          "label": "HAWKS R",
+          "base": "HAWKS",
+          "variant": "R",
+          "base_id": "hawks",
+          "id": "hawks-r"
+        },
+        {
+          "label": "HAWKS B",
+          "base": "HAWKS",
+          "variant": "B",
+          "base_id": "hawks",
+          "id": "hawks-b"
+        }
+      ]
+    },
+    {
+      "id": "ibara",
+      "name": "IBARA",
+      "variants": [
+        {
+          "label": "IBARA",
+          "base": "IBARA",
+          "variant": null,
+          "base_id": "ibara",
+          "id": "ibara"
+        }
+      ]
+    },
+    {
+      "id": "itsuka",
+      "name": "ITSUKA",
+      "variants": [
+        {
+          "label": "ITSUKA J",
+          "base": "ITSUKA",
+          "variant": "J",
+          "base_id": "itsuka",
+          "id": "itsuka-j"
+        },
+        {
+          "label": "ITSUKA R",
+          "base": "ITSUKA",
+          "variant": "R",
+          "base_id": "itsuka",
+          "id": "itsuka-r"
+        }
+      ]
+    },
+    {
+      "id": "kurogiri",
+      "name": "KUROGIRI",
+      "variants": [
+        {
+          "label": "KUROGIRI",
+          "base": "KUROGIRI",
+          "variant": null,
+          "base_id": "kurogiri",
+          "id": "kurogiri"
+        }
+      ]
+    },
+    {
+      "id": "lady-nagant",
+      "name": "LADY NAGANT",
+      "variants": [
+        {
+          "label": "LADY NAGANT",
+          "base": "LADY NAGANT",
+          "variant": null,
+          "base_id": "lady-nagant",
+          "id": "lady-nagant"
+        }
+      ]
+    },
+    {
+      "id": "midoriya",
+      "name": "MIDORIYA",
+      "variants": [
+        {
+          "label": "MIDORIYA J",
+          "base": "MIDORIYA",
+          "variant": "J",
+          "base_id": "midoriya",
+          "id": "midoriya-j"
+        },
+        {
+          "label": "MIDORIYA R",
+          "base": "MIDORIYA",
+          "variant": "R",
+          "base_id": "midoriya",
+          "id": "midoriya-r"
+        }
+      ]
+    },
+    {
+      "id": "mighty",
+      "name": "MIGHTY",
+      "variants": [
+        {
+          "label": "MIGHTY J",
+          "base": "MIGHTY",
+          "variant": "J",
+          "base_id": "mighty",
+          "id": "mighty-j"
+        },
+        {
+          "label": "MIGHTY B",
+          "base": "MIGHTY",
+          "variant": "B",
+          "base_id": "mighty",
+          "id": "mighty-b"
+        }
+      ]
+    },
+    {
+      "id": "mirio",
+      "name": "MIRIO",
+      "variants": [
+        {
+          "label": "MIRIO B",
+          "base": "MIRIO",
+          "variant": "B",
+          "base_id": "mirio",
+          "id": "mirio-b"
+        },
+        {
+          "label": "MIRIO V",
+          "base": "MIRIO",
+          "variant": "V",
+          "base_id": "mirio",
+          "id": "mirio-v"
+        }
+      ]
+    },
+    {
+      "id": "momo",
+      "name": "MOMO",
+      "variants": [
+        {
+          "label": "MOMO",
+          "base": "MOMO",
+          "variant": null,
+          "base_id": "momo",
+          "id": "momo"
+        }
+      ]
+    },
+    {
+      "id": "monoma",
+      "name": "MONOMA",
+      "variants": [
+        {
+          "label": "MONOMA",
+          "base": "MONOMA",
+          "variant": null,
+          "base_id": "monoma",
+          "id": "monoma"
+        }
+      ]
+    },
+    {
+      "id": "mont-lady",
+      "name": "MONT LADY",
+      "variants": [
+        {
+          "label": "MONT LADY",
+          "base": "MONT LADY",
+          "variant": null,
+          "base_id": "mont-lady",
+          "id": "mont-lady"
+        }
+      ]
+    },
+    {
+      "id": "mr-compress",
+      "name": "MR COMPRESS",
+      "variants": [
+        {
+          "label": "MR COMPRESS",
+          "base": "MR COMPRESS",
+          "variant": null,
+          "base_id": "mr-compress",
+          "id": "mr-compress"
+        }
+      ]
+    },
+    {
+      "id": "nejire",
+      "name": "NEJIRE",
+      "variants": [
+        {
+          "label": "NEJIRE",
+          "base": "NEJIRE",
+          "variant": null,
+          "base_id": "nejire",
+          "id": "nejire"
+        },
+        {
+          "label": "NEJIRE  V",
+          "base": "NEJIRE",
+          "variant": "V",
+          "base_id": "nejire",
+          "id": "nejire-v"
+        }
+      ]
+    },
+    {
+      "id": "ochaco",
+      "name": "OCHACO",
+      "variants": [
+        {
+          "label": "OCHACO J",
+          "base": "OCHACO",
+          "variant": "J",
+          "base_id": "ochaco",
+          "id": "ochaco-j"
+        },
+        {
+          "label": "OCHACO B",
+          "base": "OCHACO",
+          "variant": "B",
+          "base_id": "ochaco",
+          "id": "ochaco-b"
+        }
+      ]
+    },
+    {
+      "id": "ofa",
+      "name": "OFA",
+      "variants": [
+        {
+          "label": "OFA",
+          "base": "OFA",
+          "variant": null,
+          "base_id": "ofa",
+          "id": "ofa"
+        }
+      ]
+    },
+    {
+      "id": "overhaul",
+      "name": "OVERHAUL",
+      "variants": [
+        {
+          "label": "OVERHAUL J",
+          "base": "OVERHAUL",
+          "variant": "J",
+          "base_id": "overhaul",
+          "id": "overhaul-j"
+        },
+        {
+          "label": "OVERHAUL V",
+          "base": "OVERHAUL",
+          "variant": "V",
+          "base_id": "overhaul",
+          "id": "overhaul-v"
+        }
+      ]
+    },
+    {
+      "id": "present-mic",
+      "name": "PRESENT MIC",
+      "variants": [
+        {
+          "label": "PRESENT MIC",
+          "base": "PRESENT MIC",
+          "variant": null,
+          "base_id": "present-mic",
+          "id": "present-mic"
+        }
+      ]
+    },
+    {
+      "id": "red-riot",
+      "name": "RED RIOT",
+      "variants": [
+        {
+          "label": "RED RIOT J",
+          "base": "RED RIOT",
+          "variant": "J",
+          "base_id": "red-riot",
+          "id": "red-riot-j"
+        },
+        {
+          "label": "RED RIOT R",
+          "base": "RED RIOT",
+          "variant": "R",
+          "base_id": "red-riot",
+          "id": "red-riot-r"
+        }
+      ]
+    },
+    {
+      "id": "shigaraki",
+      "name": "SHIGARAKI",
+      "variants": [
+        {
+          "label": "SHIGARAKI J",
+          "base": "SHIGARAKI",
+          "variant": "J",
+          "base_id": "shigaraki",
+          "id": "shigaraki-j"
+        },
+        {
+          "label": "SHIGARAKI R",
+          "base": "SHIGARAKI",
+          "variant": "R",
+          "base_id": "shigaraki",
+          "id": "shigaraki-r"
+        },
+        {
+          "label": "SHIGARAKI V",
+          "base": "SHIGARAKI",
+          "variant": "V",
+          "base_id": "shigaraki",
+          "id": "shigaraki-v"
+        }
+      ]
+    },
+    {
+      "id": "shinso",
+      "name": "SHINSO",
+      "variants": [
+        {
+          "label": "SHINSO",
+          "base": "SHINSO",
+          "variant": null,
+          "base_id": "shinso",
+          "id": "shinso"
+        }
+      ]
+    },
+    {
+      "id": "shoto",
+      "name": "SHOTO",
+      "variants": [
+        {
+          "label": "SHOTO R",
+          "base": "SHOTO",
+          "variant": "R",
+          "base_id": "shoto",
+          "id": "shoto-r"
+        },
+        {
+          "label": "SHOTO V",
+          "base": "SHOTO",
+          "variant": "V",
+          "base_id": "shoto",
+          "id": "shoto-v"
+        }
+      ]
+    },
+    {
+      "id": "sun-eater",
+      "name": "SUN EATER",
+      "variants": [
+        {
+          "label": "SUN EATER",
+          "base": "SUN EATER",
+          "variant": null,
+          "base_id": "sun-eater",
+          "id": "sun-eater"
+        }
+      ]
+    },
+    {
+      "id": "tenya",
+      "name": "TENYA",
+      "variants": [
+        {
+          "label": "TENYA",
+          "base": "TENYA",
+          "variant": null,
+          "base_id": "tenya",
+          "id": "tenya"
+        }
+      ]
+    },
+    {
+      "id": "toga",
+      "name": "TOGA",
+      "variants": [
+        {
+          "label": "TOGA B",
+          "base": "TOGA",
+          "variant": "B",
+          "base_id": "toga",
+          "id": "toga-b"
+        },
+        {
+          "label": "TOGA V",
+          "base": "TOGA",
+          "variant": "V",
+          "base_id": "toga",
+          "id": "toga-v"
+        }
+      ]
+    },
+    {
+      "id": "tsuyu",
+      "name": "TSUYU",
+      "variants": [
+        {
+          "label": "TSUYU",
+          "base": "TSUYU",
+          "variant": null,
+          "base_id": "tsuyu",
+          "id": "tsuyu"
+        }
+      ]
+    },
+    {
+      "id": "twice",
+      "name": "TWICE",
+      "variants": [
+        {
+          "label": "TWICE",
+          "base": "TWICE",
+          "variant": null,
+          "base_id": "twice",
+          "id": "twice"
+        }
+      ]
+    }
+  ]
+}

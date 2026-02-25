@@ -1,0 +1,39 @@
+{
+  "id": "example-build",
+  "title": "EXEMPLE — Build à remplacer",
+  "characterVariantId": "midoriya-j",
+  "updatedOn": "2026-02-25",
+  "notes": "Ceci est un exemple de format. Remplace-le par tes valeurs réelles de tuning.",
+  "slots": [
+    {
+      "slot": "Spécial gauche",
+      "skill": "À remplir",
+      "level": 1,
+      "why": "À compléter"
+    },
+    {
+      "slot": "Spécial droite",
+      "skill": "À remplir",
+      "level": 1,
+      "why": "À compléter"
+    },
+    {
+      "slot": "Slot 1",
+      "skill": "À remplir",
+      "level": 1,
+      "why": "À compléter"
+    },
+    {
+      "slot": "Slot 2",
+      "skill": "À remplir",
+      "level": 1,
+      "why": "À compléter"
+    },
+    {
+      "slot": "Slot 3",
+      "skill": "À remplir",
+      "level": 1,
+      "why": "À compléter"
+    }
+  ]
+}

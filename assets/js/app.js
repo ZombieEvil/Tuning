@@ -1,0 +1,135 @@
+(() => {
+  const $ = (sel, root = document) => root.querySelector(sel);
+  const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+
+  const getPrefixFromBrand = () => {
+    // All pages include a ".brand" link back to index with a relative href.
+    // Example: "../../index.html" => prefix "../../"
+    const a = $(".brand");
+    const href = a?.getAttribute("href") || "index.html";
+    return href.replace(/index\.html$/i, "");
+  };
+
+  const setTheme = (theme) => {
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("urm_theme", theme);
+    const btn = $("#themeToggle");
+    if (btn) btn.setAttribute("aria-label", theme === "light" ? "Passer en thème sombre" : "Passer en thème clair");
+  };
+
+  const initTheme = () => {
+    const saved = localStorage.getItem("urm_theme");
+    if (saved === "light" || saved === "dark") return setTheme(saved);
+    // Default: dark
+    setTheme("dark");
+  };
+
+  const toast = (msg) => {
+    const host = $("#toast");
+    if (!host) return;
+    host.querySelector(".toast-msg").textContent = msg;
+    host.classList.add("show");
+    clearTimeout(host._t);
+    host._t = setTimeout(() => host.classList.remove("show"), 1800);
+  };
+
+  window.URM = window.URM || {};
+  window.URM.toast = toast;
+
+  window.URM.fetchJSON = async (url) => {
+    const res = await fetch(url, { cache: "no-cache" });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    return await res.json();
+  };
+
+  const initNav = () => {
+    const burger = $("#burger");
+    const drawer = $("#drawer");
+    if (burger && drawer) {
+      burger.addEventListener("click", () => {
+        const open = drawer.classList.toggle("open");
+        burger.setAttribute("aria-expanded", open ? "true" : "false");
+      });
+      $$("#drawer a").forEach((a) =>
+        a.addEventListener("click", () => {
+          drawer.classList.remove("open");
+          burger.setAttribute("aria-expanded", "false");
+        })
+      );
+    }
+
+    // Active link highlight
+    const path = location.pathname.replace(/\/index\.html$/, "/");
+    $$(".navlinks a, #drawer a").forEach((a) => {
+      const href = a.getAttribute("href");
+      if (!href || href.startsWith("http")) return;
+      const abs = new URL(href, location.href).pathname.replace(/\/index\.html$/, "/");
+      if (abs === path) a.classList.add("active");
+    });
+
+    const themeBtn = $("#themeToggle");
+    if (themeBtn) {
+      themeBtn.addEventListener("click", () => {
+        const cur = document.documentElement.getAttribute("data-theme") || "dark";
+        setTheme(cur === "dark" ? "light" : "dark");
+        toast(cur === "dark" ? "Thème clair activé !" : "Thème sombre activé !");
+      });
+    }
+  };
+
+  const initReveal = () => {
+    // Progressive enhancement: adds a small "comic entrance" on scroll.
+    const reduce = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
+    if (reduce) return;
+
+    const targets = $$("main .panel, main .speech, .chara-splash, main .tab, main .btn");
+    if (!targets.length) return;
+
+    targets.forEach((el) => el.classList.add("reveal"));
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (!e.isIntersecting) return;
+          e.target.classList.add("in");
+          io.unobserve(e.target);
+        });
+      },
+      { rootMargin: "0px 0px -10% 0px", threshold: 0.1 }
+    );
+
+    targets.forEach((el) => io.observe(el));
+  };
+
+  const pad3 = (n) => String(n).padStart(3, "0");
+  const initAssets = async () => {
+    const prefix = getPrefixFromBrand();
+    try {
+      const map = await window.URM.fetchJSON(`${prefix}assets/data/urm-character-map.json`);
+      const baseToUrmId = map?.baseToUrmId || {};
+      const bannerUrl = map?.bannerUrl;
+
+      window.URM.assets = {
+        prefix,
+        baseToUrmId,
+        bannerUrl,
+        toChCode: (urmId) => `Ch${pad3(Number(urmId))}`,
+        // Best-effort: if the remote asset isn't accessible, the UI auto-falls back.
+        charaImageUrl: (urmId) => {
+          const ch = `Ch${pad3(Number(urmId))}`;
+          return `https://ultrarumble.com/assets/Character/${ch}/GUI/FaceIcon/T_ui_${ch}_CharaImage.png`;
+        },
+      };
+    } catch (e) {
+      // If the map can't load (file:// or missing), the site still works without images.
+      window.URM.assets = { prefix };
+    }
+  };
+
+  document.addEventListener("DOMContentLoaded", async () => {
+    initTheme();
+    initNav();
+    await initAssets();
+    initReveal();
+  });
+})();

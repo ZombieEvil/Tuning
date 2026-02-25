@@ -1,0 +1,35 @@
+{
+  "id": "bakugo",
+  "name": "Bakugo",
+  "headline": "Fiche perso — à compléter",
+  "playstyle": [
+    "Rôle & style : à compléter.",
+    "Priorités : à compléter.",
+    "Erreurs fréquentes : à compléter."
+  ],
+  "tips": [
+    "Astuce 1 : à compléter.",
+    "Astuce 2 : à compléter.",
+    "Astuce 3 : à compléter."
+  ],
+  "synergies": [
+    {
+      "with": "À compléter",
+      "why": "À compléter."
+    },
+    {
+      "with": "À compléter",
+      "why": "À compléter."
+    }
+  ],
+  "sources": [
+    {
+      "label": "Site officiel (EU) — MY HERO ULTRA RUMBLE",
+      "url": "https://en.bandainamcoent.eu/my-hero-academia/my-hero-ultra-rumble"
+    },
+    {
+      "label": "News / patch notes (US) — Bandai Namco Entertainment",
+      "url": "https://www.bandainamcoent.com/games/my-hero-ultra-rumble/news"
+    }
+  ]
+}

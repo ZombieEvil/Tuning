@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="fr" class="bg-halftone bg-mha">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ressources | ULTRA RUMBLE Guide</title>
+  <meta name="description" content="Guide fan-made pour MY HERO ULTRA RUMBLE : roster, tuning, guides, meta.">
+  <meta name="theme-color" content="#0b1020">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body >
+<header class="header">
+  <a class="skip" href="#main">Aller au contenu</a>
+  <nav class="navbar" aria-label="Navigation principale">
+    <a class="brand" href="../index.html">
+      <span class="brand-logo" aria-hidden="true"></span>
+      <span class="brand-title">
+        <strong>ULTRA RUMBLE</strong>
+        <span>Guide T.U.N.I.N.G • vibes comics</span>
+      </span>
+    </a>
+
+    <div class="navlinks" role="navigation">
+      <a href="../index.html">Accueil</a>
+      <a href="../roster/index.html">Personnages</a>
+      <a href="../tuning/index.html">Tuning</a>
+      <a href="../guides/index.html">Guides</a>
+      <a href="../meta/index.html">Meta</a>
+      <a href="../resources/index.html">Ressources</a>
+      <a href="../contact/index.html">Contact</a>
+    </div>
+
+    <div class="nav-actions">
+      <button class="iconbtn burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false" type="button">☰</button>
+      <button class="iconbtn" id="themeToggle" aria-label="Changer le thème" type="button">◐</button>
+      <a class="iconbtn" href="../roster/index.html" aria-label="Recherche personnages">⌕</a>
+    </div>
+  </nav>
+
+  <div class="mobile-drawer" id="drawer">
+    <div class="container">
+      <a href="../index.html">Accueil</a>
+      <a href="../roster/index.html">Personnages</a>
+      <a href="../tuning/index.html">Tuning</a>
+      <a href="../guides/index.html">Guides</a>
+      <a href="../meta/index.html">Meta</a>
+      <a href="../resources/index.html">Ressources</a>
+      <a href="../contact/index.html">Contact</a>
+    </div>
+  </div>
+</header>
+<main id="main" class="container">
+
+<section class="panel cut stack">
+  <div class="kicker">Salle des héros</div>
+  <h1 class="h1" style="margin:0">Ressources & communauté</h1>
+  <p class="p">Les liens utiles pour compléter le guide (et garder la motivation).</p>
+
+  <div style="display:flex; gap:10px; flex-wrap:wrap;">
+    <a class="btn secondary" href="../home-sheet/index.html">Voir le tableau HOME (CSV)</a>
+    <a class="btn ghost" href="../roster/index.html">Aller au roster</a>
+  </div>
+  <div class="small" style="margin-top:6px">Le tableau HOME est affiché directement depuis le fichier intégré (pas d’import côté visiteur).</div>
+
+  <div class="grid grid-2" style="margin-top:14px">
+    <div class="panel stack">
+      <h2 class="h2">Discord</h2>
+      <p class="p">Serveur communauté (lien depuis ton fichier HOME).</p>
+      <a class="btn" href="https://discord.gg/8zVGUfYquv" target="_blank" rel="noopener">Rejoindre</a>
+      <div class="small mono">https://discord.gg/8zVGUfYquv</div>
+    </div>
+
+    <div class="panel stack">
+      <h2 class="h2">YouTube</h2>
+      <p class="p">Chaîne/creator (lien depuis ton fichier HOME).</p>
+      <a class="btn" href="https://www.youtube.com/@DakoSideQuest" target="_blank" rel="noopener">Ouvrir</a>
+      <div class="small mono">https://www.youtube.com/@DakoSideQuest</div>
+    </div>
+  </div>
+</section>
+
+<section class="panel stack" style="margin-top:18px">
+  <h2 class="h2">À ajouter</h2>
+  <div class="grid grid-3">
+    <div class="speech">
+      <strong>Tierlists / trackers</strong>
+      <div class="small">Ajoute ici tes outils (Google Sheets, docs, etc.).</div>
+    </div>
+    <div class="speech">
+      <strong>Clips & guides vidéo</strong>
+      <div class="small">Embeds YouTube pour chaque perso/variante.</div>
+    </div>
+    <div class="speech">
+      <strong>FAQ support</strong>
+      <div class="small">“Comment je propose une correction ?” / “Comment je lis les builds ?”.</div>
+    </div>
+  </div>
+</section>
+
+</main>
+<footer class="footer">
+  <div class="container grid grid-3">
+    <div class="stack">
+      <div class="kicker">PLUS ULTRA, mais clair</div>
+      <div class="small">
+        Site vitrine/guide créé à partir de ton fichier <span class="mono">TUNING ULTRA RUMBLE - HOME.csv</span>.
+        Les builds T.U.N.I.N.G détaillés se branchent via des fichiers JSON dans <span class="mono">assets/data/tuning/</span>.
+      </div>
+      <div class="small">
+        <strong>Disclaimer :</strong> site non officiel, non affilié à Bandai Namco / Byking / détenteurs de droits.
+      </div>
+    </div>
+
+    <div class="stack">
+      <div class="kicker">Navigation</div>
+      <a href="../roster/index.html">Personnages</a>
+      <a href="../tuning/index.html">Générateur de tuning</a>
+      <a href="../meta/index.html">Meta & patch notes</a>
+      <a href="../resources/index.html">Ressources</a>
+    </div>
+
+    <div class="stack">
+      <div class="kicker">Deploy</div>
+      <div class="small">
+        Héberge ce dossier sur GitHub Pages / Netlify / Vercel.
+        Pour tester en local : <span class="mono">python -m http.server</span>
+      </div>
+      <a class="btn secondary" href="../about/index.html">À propos</a>
+    </div>
+  </div>
+  <div class="toast" id="toast" aria-live="polite" aria-atomic="true">
+    <div class="panel"><span class="toast-msg">OK</span></div>
+  </div>
+</footer>
+<script src="../assets/js/app.js"></script>
+
+</body>
+</html>

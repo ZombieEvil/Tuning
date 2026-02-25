@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="fr" class="bg-halftone bg-mha">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Personnages | ULTRA RUMBLE Guide</title>
+  <meta name="description" content="Guide fan-made pour MY HERO ULTRA RUMBLE : roster, tuning, guides, meta.">
+  <meta name="theme-color" content="#0b1020">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body >
+<header class="header">
+  <a class="skip" href="#main">Aller au contenu</a>
+  <nav class="navbar" aria-label="Navigation principale">
+    <a class="brand" href="../index.html">
+      <span class="brand-logo" aria-hidden="true"></span>
+      <span class="brand-title">
+        <strong>ULTRA RUMBLE</strong>
+        <span>Guide T.U.N.I.N.G • vibes comics</span>
+      </span>
+    </a>
+
+    <div class="navlinks" role="navigation">
+      <a href="../index.html">Accueil</a>
+      <a href="../roster/index.html">Personnages</a>
+      <a href="../tuning/index.html">Tuning</a>
+      <a href="../guides/index.html">Guides</a>
+      <a href="../meta/index.html">Meta</a>
+      <a href="../resources/index.html">Ressources</a>
+      <a href="../contact/index.html">Contact</a>
+    </div>
+
+    <div class="nav-actions">
+      <button class="iconbtn burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false" type="button">☰</button>
+      <button class="iconbtn" id="themeToggle" aria-label="Changer le thème" type="button">◐</button>
+      <a class="iconbtn" href="../roster/index.html" aria-label="Recherche personnages">⌕</a>
+    </div>
+  </nav>
+
+  <div class="mobile-drawer" id="drawer">
+    <div class="container">
+      <a href="../index.html">Accueil</a>
+      <a href="../roster/index.html">Personnages</a>
+      <a href="../tuning/index.html">Tuning</a>
+      <a href="../guides/index.html">Guides</a>
+      <a href="../meta/index.html">Meta</a>
+      <a href="../resources/index.html">Ressources</a>
+      <a href="../contact/index.html">Contact</a>
+    </div>
+  </div>
+</header>
+<main id="main" class="container">
+
+<section class="panel cut stack">
+  <div class="kicker">Roster</div>
+  <h1 class="h1" style="margin:0">Personnages & variantes</h1>
+  <p class="p">Recherche rapide + filtres. Les tags J/R/B/V sont affichés tels quels depuis ton fichier HOME.</p>
+
+  <div class="searchbar">
+    <input id="rosterSearch" class="input" type="search" placeholder="Tape un nom… (ex: Shigaraki, Dabi, Hawks)" autocomplete="off">
+    <a class="btn secondary" href="../tuning/index.html">Générateur</a>
+  </div>
+
+  <div class="grid grid-2">
+    <div class="panel stack" style="box-shadow:none; border-style:dashed">
+      <div class="kicker">Filtres variantes</div>
+      <div class="small">Affiche les personnages qui ont au moins une variante cochée.</div>
+      <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:10px">
+        <label class="badge" style="cursor:pointer"><input type="checkbox" name="vf" value="J"> J</label>
+        <label class="badge" style="cursor:pointer"><input type="checkbox" name="vf" value="R"> R</label>
+        <label class="badge" style="cursor:pointer"><input type="checkbox" name="vf" value="B"> B</label>
+        <label class="badge" style="cursor:pointer"><input type="checkbox" name="vf" value="V"> V</label>
+        <label class="badge" style="cursor:pointer"><input type="checkbox" name="vf" value="NONE"> —</label>
+      </div>
+      <div class="small" style="margin-top:10px" id="variantNote"></div>
+    </div>
+
+    <div class="panel stack" style="box-shadow:none; border-style:dashed">
+      <div class="kicker">Résultats</div>
+      <div class="h2" style="margin:0"><span id="rosterCount">—</span></div>
+      <div class="small">Clique “Ouvrir la fiche” pour voir les variantes + le panneau de tuning.</div>
+      <div class="notice">
+        <strong>Astuce :</strong>
+        <div class="small" style="margin-top:6px">
+          Si tu ajoutes <span class="mono">assets/data/tuning/&lt;variantId&gt;.json</span>, la fiche affichera ton build automatiquement.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="grid grid-3" style="margin-top:18px" id="rosterList" aria-live="polite">
+  <!-- JS renders cards here -->
+</section>
+
+</main>
+<footer class="footer">
+  <div class="container grid grid-3">
+    <div class="stack">
+      <div class="kicker">PLUS ULTRA, mais clair</div>
+      <div class="small">
+        Site vitrine/guide créé à partir de ton fichier <span class="mono">TUNING ULTRA RUMBLE - HOME.csv</span>.
+        Les builds T.U.N.I.N.G détaillés se branchent via des fichiers JSON dans <span class="mono">assets/data/tuning/</span>.
+      </div>
+      <div class="small">
+        <strong>Disclaimer :</strong> site non officiel, non affilié à Bandai Namco / Byking / détenteurs de droits.
+      </div>
+    </div>
+
+    <div class="stack">
+      <div class="kicker">Navigation</div>
+      <a href="../roster/index.html">Personnages</a>
+      <a href="../tuning/index.html">Générateur de tuning</a>
+      <a href="../meta/index.html">Meta & patch notes</a>
+      <a href="../resources/index.html">Ressources</a>
+    </div>
+
+    <div class="stack">
+      <div class="kicker">Deploy</div>
+      <div class="small">
+        Héberge ce dossier sur GitHub Pages / Netlify / Vercel.
+        Pour tester en local : <span class="mono">python -m http.server</span>
+      </div>
+      <a class="btn secondary" href="../about/index.html">À propos</a>
+    </div>
+  </div>
+  <div class="toast" id="toast" aria-live="polite" aria-atomic="true">
+    <div class="panel"><span class="toast-msg">OK</span></div>
+  </div>
+</footer>
+<script src="../assets/js/app.js"></script>
+<script src="../assets/js/roster.js"></script>
+</body>
+</html>
