@@ -54,14 +54,60 @@
 </header>
 <main id="main" class="container">
 
+
 <section class="panel cut stack">
-  <div class="kicker">Atelier de tuning</div>
-  <h1 class="h1" style="margin:0">Générateur de builds T.U.N.I.N.G.</h1>
+  <div class="kicker">Base de données</div>
+  <h1 class="h1" style="margin:0">T.U.N.I.N.G — skills, icônes, niveaux</h1>
   <p class="p">
-    Sélectionne un personnage + une variante. Si un fichier JSON de build existe, le site l’affiche (copie + export PNG).
+    Ici, tu as la base de données complète (skills + descriptions + niveaux + images). 
+    Si l’embed est bloqué par le navigateur, un bouton te permet d’ouvrir la page en plein écran.
   </p>
 
-  <div class="grid grid-2">
+  <div id="dbEmbed" class="stack" style="gap:12px">
+    <div class="tabbar" role="tablist" aria-label="Onglets base de données">
+      <button class="tabbtn" type="button" role="tab" aria-selected="true" data-tab="tuning" data-src="https://fr.ultrarumble.com/tuning">T.U.N.I.N.G</button>
+      <button class="tabbtn" type="button" role="tab" aria-selected="false" data-tab="chars" data-src="https://fr.ultrarumble.com/characters">Personnages</button>
+      <button class="tabbtn" type="button" role="tab" aria-selected="false" data-tab="costumes" data-src="https://fr.ultrarumble.com/costumes">Costumes</button>
+      <button class="tabbtn" type="button" role="tab" aria-selected="false" data-tab="notices" data-src="https://fr.ultrarumble.com/notices">Notices</button>
+    </div>
+
+    <div class="iframeShell">
+      <iframe id="dbFrame" title="UltraRumble Database" loading="lazy" referrerpolicy="no-referrer"></iframe>
+      <div class="iframeFallback" id="dbFallback">
+        <div class="panel stack">
+          <div class="kicker">Embed bloqué</div>
+          <div class="h2" style="margin:0">Ton navigateur empêche l’affichage ici.</div>
+          <div class="small">
+            Pas de panique : clique sur “Ouvrir en plein écran”.
+          </div>
+          <div style="display:flex; gap:10px; flex-wrap:wrap">
+            <a class="btn secondary" id="dbFallbackOpen" target="_blank" rel="noopener">Ouvrir en plein écran</a>
+            <a class="btn ghost" href="https://fr.ultrarumble.com/" target="_blank" rel="noopener">Aller sur la home DB</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex; gap:10px; flex-wrap:wrap;">
+      <a class="btn secondary" id="dbOpen" target="_blank" rel="noopener">Ouvrir en plein écran</a>
+      <a class="btn ghost" href="../roster/index.html">Retour roster</a>
+    </div>
+
+    <div class="small" style="opacity:.9">
+      Source : UltraRumble Database (site non officiel). Ton guide (ce site) reste un wrapper “comics” + tes builds.
+    </div>
+  </div>
+</section>
+
+<section class="panel stack" style="margin-top:18px">
+  <div class="kicker">Tes builds (optionnel)</div>
+  <h2 class="h2" style="margin:0">Générateur “Build recommandé”</h2>
+  <div class="small">
+    Ton fichier HOME est déjà intégré (les visiteurs n’importent rien). 
+    Pour afficher TES builds recommandés, ajoute des fichiers JSON dans <span class="mono">assets/data/tuning/</span>.
+  </div>
+
+  <div class="grid grid-2" style="margin-top:8px">
     <div class="stack">
       <label class="small" for="baseSel"><strong>Personnage</strong></label>
       <select id="baseSel" class="input" aria-label="Sélection personnage"></select>
@@ -70,10 +116,9 @@
       <select id="variantSel" class="input" aria-label="Sélection variante"></select>
 
       <div class="notice">
-        <strong>Format des builds</strong>
+        <strong>Besoin d’un skill ?</strong>
         <div class="small" style="margin-top:6px">
-          Modèle : <a href="../assets/data/tuning/example.json" target="_blank" rel="noopener">example.json</a>.
-          Pour activer un build : crée <span class="mono">assets/data/tuning/&lt;variantId&gt;.json</span>.
+          Utilise l’onglet “T.U.N.I.N.G” au-dessus pour voir l’icône + la description + les niveaux, puis colle ça dans ton JSON.
         </div>
       </div>
     </div>
@@ -85,23 +130,6 @@
   </div>
 </section>
 
-<section class="panel stack" style="margin-top:18px">
-  <h2 class="h2">Comprendre le système</h2>
-  <div class="grid grid-2">
-    <div class="speech">
-      <strong>But :</strong> booster ton style de jeu via des “skills” appliquées sur un costume, et garder une cohérence de build.
-      <div class="small" style="margin-top:6px">
-        👉 Ajoute tes explications précises ici (et dans les guides), pour que le site reste factuel et à jour.
-      </div>
-    </div>
-    <div class="speech">
-      <strong>Conseil UX :</strong> garde 2–3 builds par variante (agressif / survie / team) pour que ça reste lisible.
-      <div class="small" style="margin-top:6px">
-        (Tu peux dupliquer les fichiers JSON : ex <span class="mono">midoriya-j-agro.json</span> et adapter le générateur ensuite.)
-      </div>
-    </div>
-  </div>
-</section>
 
 </main>
 <footer class="footer">
@@ -129,7 +157,7 @@
       <div class="kicker">Deploy</div>
       <div class="small">
         Héberge ce dossier sur GitHub Pages / Netlify / Vercel.
-        Pour tester en local : <span class="mono">python -m http.server</span>
+        Déploie sur GitHub Pages : dépôt → <span class="mono">Settings</span> → <span class="mono">Pages</span>.
       </div>
       <a class="btn secondary" href="../about/index.html">À propos</a>
     </div>
@@ -140,6 +168,7 @@
 </footer>
 <script src="../assets/data/inline-data.js"></script>
 <script src="../assets/js/app.js"></script>
+<script src="../assets/js/db-embed.js"></script>
 <script src="../assets/js/tuning.js"></script>
 </body>
 </html>
