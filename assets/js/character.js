@@ -178,9 +178,8 @@
         <div class="notice">
           <strong>Important :</strong>
           <div class="small" style="margin-top:6px">
-            Ton fichier HOME est déjà intégré au site (les visiteurs n’ont rien à importer).
-            En revanche, il ne contient pas les réglages de T.U.N.I.N.G détaillés : les sections “Tuning recommandé”
-            s’affichent automatiquement dès que tu ajoutes tes builds dans <span class="mono">assets/data/tuning/</span>.
+            Ton fichier HOME est intégré (les visiteurs n’ont rien à importer).
+            Pour les skills avec <strong>icônes</strong>, <strong>descriptions</strong> et <strong>niveaux</strong>, utilise la base de données (boutons ci-dessous).
           </div>
         </div>
       </section>
@@ -196,6 +195,7 @@
 
         <div class="panel stack">
           <h2 class="h2">Tuning recommandé</h2>
+          <div class="notice" id="dbQuick"></div>
           <div id="tuningBox"></div>
           <div class="hr"></div>
           <h2 class="h2">Synergies</h2>
@@ -208,6 +208,65 @@
         <div id="srcBox" class="stack"></div>
       </section>
     `;
+
+    // DB quick links (skills + tuning)
+    const dbQuick = $("#dbQuick");
+    if (dbQuick) {
+      const dbBase = "https://fr.ultrarumble.com";
+      const charId = assets?.baseToUrmId?.[base.id];
+      const charUrl = charId ? `${dbBase}/character/${charId}` : `${dbBase}/characters`;
+      dbQuick.innerHTML = `
+        <strong>Skills & tuning (DB)</strong>
+        <div class="small" style="margin-top:6px">
+          Ouvre la fiche DB pour voir toutes les skills, les images de tuning, et les valeurs par niveau.
+        </div>
+        <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:10px">
+          <a class="btn secondary" id="dbCharPage" href="${escapeHtml(charUrl)}" target="_blank" rel="noopener">Fiche DB</a>
+          <a class="btn ghost" href="${dbBase}/tuning" target="_blank" rel="noopener">T.U.N.I.N.G</a>
+          <button class="btn ghost" type="button" id="dbEmbedBtn">Aperçu ici</button>
+        </div>
+        <div id="dbEmbedWrap" style="display:none; margin-top:12px">
+          <div class="iframeShell" style="min-height:420px">
+            <iframe id="dbCharFrame" title="UltraRumble DB — personnage" loading="lazy" referrerpolicy="no-referrer"></iframe>
+            <div class="iframeFallback" id="dbCharFallback">
+              <div class="panel stack">
+                <div class="kicker">Embed bloqué</div>
+                <div class="small">Clique “Fiche DB” pour l’ouvrir en plein écran.</div>
+                <a class="btn secondary" href="${escapeHtml(charUrl)}" target="_blank" rel="noopener">Fiche DB</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      const btn = $("#dbEmbedBtn", dbQuick);
+      const wrap = $("#dbEmbedWrap", dbQuick);
+      const frame = $("#dbCharFrame", dbQuick);
+      const fb = $("#dbCharFallback", dbQuick);
+      const pageLink = $("#dbCharPage", dbQuick);
+
+      btn?.addEventListener("click", () => {
+        const open = wrap.style.display !== "none";
+        wrap.style.display = open ? "none" : "block";
+        btn.textContent = open ? "Aperçu ici" : "Masquer l’aperçu";
+
+        if (!open && frame && !frame.src) {
+          frame.src = pageLink?.href || charUrl;
+          setTimeout(() => {
+            try {
+              const doc = frame.contentDocument;
+              const href = doc?.location?.href || "";
+              if (href === "about:blank") {
+                if (fb) fb.style.display = "flex";
+              }
+            } catch (e) {
+              // Cross-origin => loaded
+            }
+          }, 1800);
+        }
+      });
+    }
+
     // fill content
     const play = $("#playstyleList");
     if (play) play.innerHTML = (content.playstyle || []).map(t => `<li>${escapeHtml(t)}</li>`).join("");

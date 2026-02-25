@@ -77,7 +77,7 @@
       roster = await window.URM.fetchJSON(`${prefix}assets/data/roster.json`);
     } catch (e) {
       $("#rosterList").innerHTML =
-        `<div class="panel notice"><strong>Impossible de charger les données.</strong><div class="small">Lance le site via un serveur local (ex: <span class="mono">python -m http.server</span>).</div></div>`;
+        `<div class="panel notice"><strong>Impossible de charger les données.</strong><div class="small">Vérifie que tu es bien sur une URL <span class="mono">https://</span> (GitHub Pages) et que le dossier <span class="mono">assets/data/</span> est présent.</div></div>`;
       return;
     }
 
