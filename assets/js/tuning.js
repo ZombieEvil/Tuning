@@ -151,6 +151,14 @@
       const base = bases.find(b => b.id === baseSel.value) || bases[0];
       const variant = base.variants.find(v => v.id === variantSel.value) || base.variants[0];
 
+      const urmId = window.URM?.assets?.baseToUrmId?.[base.id];
+      const faceCandidates = (urmId && typeof window.URM?.assets?.charaImageCandidates === "function")
+        ? window.URM.assets.charaImageCandidates(urmId)
+        : null;
+      const dbBase = "https://fr.ultrarumble.com";
+      const dbCharUrl = urmId ? `${dbBase}/character/${urmId}` : `${dbBase}/characters`;
+
+
       out.innerHTML = `<div class="small">Chargement…</div>`;
 
       let build=null;
@@ -160,18 +168,35 @@
 
       if (!build){
         out.innerHTML = `
-          <div class="notice">
-            <strong>Pas de build pour ${escapeHtml(variant.label)}.</strong>
-            <div class="small" style="margin-top:8px">
-              Ajoute <span class="mono">${escapeHtml(`assets/data/tuning/${variant.id}.json`)}</span>
-              (modèle : <a href="${prefix}assets/data/tuning/example.json" target="_blank" rel="noopener">example.json</a>)
+          <div class="speech">
+            <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;">
+              <div style="display:flex; align-items:center; gap:12px;">
+                ${faceCandidates ? `<img id="genFace" data-srcs="${escapeHtml(faceCandidates.join('|'))}" alt="${escapeHtml(base.name)}" style="width:52px; height:52px; object-fit:cover; border-radius:14px; border:3px solid var(--ink); box-shadow:var(--shadow);" loading="lazy">` : ``}
+                <div>
+                  <div style="font-weight:1000">${escapeHtml(base.name)} • ${escapeHtml(variant.label)}</div>
+                  <div class="small">Build recommandé : <span class="mono">non publié</span></div>
+                </div>
+              </div>
+              <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                <a class="btn secondary" href="${prefix}characters/${base.id}/index.html#${variant.id}">Ouvrir la fiche</a>
+                <button class="btn ghost" type="button" id="openDbBtn">Voir skills & dégâts</button>
+              </div>
             </div>
-            <div style="margin-top:10px; display:flex; gap:10px; flex-wrap:wrap;">
-              <a class="btn secondary" href="${prefix}characters/${base.id}/index.html#${variant.id}">Ouvrir la fiche</a>
-              <a class="btn ghost" href="${prefix}assets/data/tuning/example.json" target="_blank" rel="noopener">Voir exemple</a>
+            <div class="notice" style="margin-top:12px">
+              <strong>Pas de build recommandé pour le moment.</strong>
+              <div class="small" style="margin-top:8px">
+                Tu peux quand même consulter <strong>tous les skills + icônes + valeurs</strong> dans l’onglet
+                <span class="mono">T.U.N.I.N.G</span> (sur ce site).
+              </div>
             </div>
           </div>
         `;
+        const imgEl = $("#genFace", out);
+        if (imgEl) {
+          const srcs = (imgEl.getAttribute("data-srcs") || "").split("|").filter(Boolean);
+          window.URM?.loadImage?.(imgEl, srcs);
+        }
+        $("#openDbBtn", out)?.addEventListener("click", () => window.URM?.modal?.open({ title: `${base.name} — DB`, url: dbCharUrl }));
         return;
       }
 
@@ -187,13 +212,17 @@
       out.innerHTML = `
         <div class="speech">
           <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:12px; flex-wrap:wrap;">
-            <div>
-              <div style="font-weight:1000">${escapeHtml(build.title || "Build")}</div>
-              <div class="small">Mis à jour : <span class="mono">${escapeHtml(build.updatedOn || "—")}</span></div>
+            <div style="display:flex; align-items:center; gap:12px;">
+              ${faceCandidates ? `<img id="genFace2" data-srcs="${escapeHtml(faceCandidates.join('|'))}" alt="${escapeHtml(base.name)}" style="width:52px; height:52px; object-fit:cover; border-radius:14px; border:3px solid var(--ink); box-shadow:var(--shadow);" loading="lazy">` : ``}
+              <div>
+                <div style="font-weight:1000">${escapeHtml(build.title || "Build")}</div>
+                <div class="small">${escapeHtml(base.name)} • ${escapeHtml(variant.label)} — Mis à jour : <span class="mono">${escapeHtml(build.updatedOn || "—")}</span></div>
+              </div>
             </div>
             <div style="display:flex; gap:10px; flex-wrap:wrap;">
               <button class="btn secondary" id="copyBtn" type="button">Copier</button>
               <button class="btn" id="pngBtn" type="button">Exporter PNG</button>
+              <button class="btn ghost" id="openDbBtn2" type="button">DB (skills & dégâts)</button>
             </div>
           </div>
           <div style="margin-top:12px; overflow:auto">
@@ -202,6 +231,13 @@
           ${build.notes ? `<div class="small" style="margin-top:10px"><strong>Note :</strong> ${escapeHtml(build.notes)}</div>` : ""}
         </div>
       `;
+
+      const imgEl2 = $("#genFace2", out);
+      if (imgEl2) {
+        const srcs = (imgEl2.getAttribute("data-srcs") || "").split("|").filter(Boolean);
+        window.URM?.loadImage?.(imgEl2, srcs);
+      }
+      $("#openDbBtn2", out)?.addEventListener("click", () => window.URM?.modal?.open({ title: `${base.name} — DB`, url: dbCharUrl }));
 
       const label = `${base.name} • ${variant.label}`;
 

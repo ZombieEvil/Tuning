@@ -9,6 +9,7 @@
     const buttons = $$("[data-tab]", host);
     const frame = $("#dbFrame", host);
     const openLink = $("#dbOpen", host);
+    const openInSite = $("#dbOpenInSite", host);
     const fallback = $("#dbFallback", host);
     const fallbackLink = $("#dbFallbackOpen", host);
 
@@ -20,6 +21,10 @@
       // update links
       if (openLink) openLink.href = src;
       if (fallbackLink) fallbackLink.href = src;
+
+      if (openInSite) {
+        openInSite.onclick = () => window.URM?.modal?.open({ title: "Base de données — T.U.N.I.N.G", url: src });
+      }
 
       // reset
       if (fallback) fallback.style.display = "none";

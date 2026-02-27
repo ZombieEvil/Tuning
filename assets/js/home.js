@@ -35,10 +35,16 @@
     } catch (e) {}
 
     const baseToUrmId = map?.baseToUrmId || window.URM?.assets?.baseToUrmId || {};
-    const charaImageUrl = (urmId) => {
-      if (typeof window.URM?.assets?.charaImageUrl === "function") return window.URM.assets.charaImageUrl(urmId);
+    const cand = (urmId) => {
+      if (typeof window.URM?.assets?.charaImageCandidates === "function") return window.URM.assets.charaImageCandidates(urmId);
       const ch = `Ch${String(Number(urmId)).padStart(3, "0")}`;
-      return `https://ultrarumble.com/assets/Character/${ch}/GUI/FaceIcon/T_ui_${ch}_CharaImage.png`;
+      const rel = `/assets/Character/${ch}/GUI/FaceIcon/T_ui_${ch}_CharaImage`;
+      return [
+        `https://ultrarumble.com${rel}.png`,
+        `https://fr.ultrarumble.com${rel}.png`,
+        `https://ultrarumble.com${rel}.webp`,
+        `https://fr.ultrarumble.com${rel}.webp`,
+      ];
     };
 
     const bases = (roster?.bases || []).slice(0, 12);
@@ -47,7 +53,7 @@
       .map((b) => {
         const urmId = baseToUrmId[b.id];
         const img = urmId
-          ? `<img src="${escapeHtml(charaImageUrl(urmId))}" alt="" loading="lazy" decoding="async" onerror="this.remove()">`
+          ? `<img data-urm-img="1" data-srcs="${escapeHtml(cand(urmId).join('|'))}" alt="" loading="lazy" decoding="async">`
           : "";
 
         const firstTags = (b.variants || []).slice(0, 3).map(v => v.variant ? `<span class="tag tag--${v.variant}">${v.variant}</span>` : `<span class="tag">—</span>`).join(" ");
@@ -68,6 +74,11 @@
         `;
       })
       .join("");
+
+    host.querySelectorAll('img[data-urm-img="1"]').forEach((imgEl) => {
+      const srcs = (imgEl.getAttribute('data-srcs') || '').split('|').filter(Boolean);
+      window.URM?.loadImage?.(imgEl, srcs);
+    });
   };
 
   document.addEventListener("DOMContentLoaded", () => {

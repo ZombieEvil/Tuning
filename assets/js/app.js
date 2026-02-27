@@ -36,6 +36,98 @@
   window.URM = window.URM || {};
   window.URM.toast = toast;
 
+  // Progressive image loader: tries multiple candidate URLs before giving up.
+  window.URM.loadImage = (imgEl, candidates, { classOnFail = "img-missing" } = {}) => {
+    if (!imgEl || !candidates || !candidates.length) return;
+    const urls = candidates.filter(Boolean);
+    let i = 0;
+
+    const tryNext = () => {
+      if (i >= urls.length) {
+        imgEl.classList.add(classOnFail);
+        return;
+      }
+      imgEl.src = urls[i++];
+    };
+
+    imgEl.addEventListener("error", tryNext);
+    tryNext();
+  };
+
+  // Full-screen modal for embedded DB pages (keeps users on your site).
+  window.URM.modal = {
+    open({ title = "", url = "" } = {}) {
+      if (!url) return;
+      let host = document.getElementById("urmModal");
+      if (!host) {
+        host = document.createElement("div");
+        host.id = "urmModal";
+        host.className = "urmModal";
+        host.innerHTML = `
+          <div class="urmModal__backdrop" data-close="1"></div>
+          <div class="urmModal__panel" role="dialog" aria-modal="true" aria-label="Base de données">
+            <div class="urmModal__bar">
+              <div class="urmModal__title"></div>
+              <div class="urmModal__actions">
+                <a class="btn ghost" id="urmModalOpen" target="_blank" rel="noopener">Ouvrir sur la DB</a>
+                <button class="btn secondary" type="button" data-close="1">Fermer</button>
+              </div>
+            </div>
+            <div class="urmModal__body">
+              <iframe id="urmModalFrame" title="UltraRumble Database" loading="lazy" referrerpolicy="no-referrer"></iframe>
+              <div class="iframeFallback" id="urmModalFallback">
+                <div class="panel stack">
+                  <div class="kicker">Embed bloqué</div>
+                  <div class="small">Ton navigateur empêche l’affichage intégré. Utilise “Ouvrir sur la DB”.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+        document.body.appendChild(host);
+        host.addEventListener("click", (e) => {
+          const t = e.target;
+          if (t && t.getAttribute && t.getAttribute("data-close") === "1") {
+            window.URM.modal.close();
+          }
+        });
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape") window.URM.modal.close();
+        });
+      }
+
+      host.classList.add("open");
+      host.querySelector(".urmModal__title").textContent = title || "Base de données";
+
+      const frame = host.querySelector("#urmModalFrame");
+      const fallback = host.querySelector("#urmModalFallback");
+      const open = host.querySelector("#urmModalOpen");
+      if (open) open.href = url;
+      if (fallback) fallback.style.display = "none";
+      if (frame) {
+        frame.src = url;
+        setTimeout(() => {
+          try {
+            const doc = frame.contentDocument;
+            const href = doc?.location?.href || "";
+            if (href === "about:blank") {
+              if (fallback) fallback.style.display = "flex";
+            }
+          } catch (e) {
+            // Cross-origin access error usually means the page loaded.
+          }
+        }, 1800);
+      }
+    },
+    close() {
+      const host = document.getElementById("urmModal");
+      if (!host) return;
+      host.classList.remove("open");
+      const frame = host.querySelector("#urmModalFrame");
+      if (frame) frame.src = "about:blank";
+    },
+  };
+
   window.URM.fetchJSON = async (url) => {
     const clean = (u) => (u || "").toString().split("#")[0].split("?")[0];
 
@@ -141,10 +233,16 @@
         baseToUrmId,
         bannerUrl,
         toChCode: (urmId) => `Ch${pad3(Number(urmId))}`,
-        // Best-effort: if the remote asset isn't accessible, the UI auto-falls back.
-        charaImageUrl: (urmId) => {
+        // Best-effort: try multiple domains + extensions.
+        charaImageCandidates: (urmId) => {
           const ch = `Ch${pad3(Number(urmId))}`;
-          return `https://ultrarumble.com/assets/Character/${ch}/GUI/FaceIcon/T_ui_${ch}_CharaImage.png`;
+          const rel = `/assets/Character/${ch}/GUI/FaceIcon/T_ui_${ch}_CharaImage`;
+          return [
+            `https://ultrarumble.com${rel}.png`,
+            `https://fr.ultrarumble.com${rel}.png`,
+            `https://ultrarumble.com${rel}.webp`,
+            `https://fr.ultrarumble.com${rel}.webp`,
+          ];
         },
       };
     } catch (e) {
@@ -153,10 +251,18 @@
     }
   };
 
+  const initSW = () => {
+    // Optional: caches cross-origin assets (images) for faster repeat visits.
+    if (!("serviceWorker" in navigator)) return;
+    if (location.protocol !== "https:") return; // SW requires https (or localhost)
+    navigator.serviceWorker.register(`${getPrefixFromBrand()}sw.js`).catch(() => {});
+  };
+
   document.addEventListener("DOMContentLoaded", async () => {
     initTheme();
     initNav();
     await initAssets();
     initReveal();
+    initSW();
   });
 })();

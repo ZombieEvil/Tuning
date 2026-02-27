@@ -151,8 +151,8 @@
     // skeleton first
     const assets = window.URM?.assets;
     const urmId = assets?.baseToUrmId?.[base.id];
-    const imgUrl = (urmId && typeof assets?.charaImageUrl === "function") ? assets.charaImageUrl(urmId) : null;
-    const heroImg = imgUrl ? `<img src="${escapeHtml(imgUrl)}" alt="" loading="lazy" decoding="async" onerror="this.remove()">` : "";
+    const candidates = (urmId && typeof assets?.charaImageCandidates === "function") ? assets.charaImageCandidates(urmId) : null;
+    const heroImg = candidates ? `<img id="heroImg" data-srcs="${escapeHtml(candidates.join('|'))}" alt="" loading="lazy" decoding="async">` : "";
 
     host.innerHTML = `
       <section class="panel cut stack">
@@ -209,6 +209,13 @@
       </section>
     `;
 
+    // Load hero image with fallbacks
+    const hero = $("#heroImg");
+    if (hero) {
+      const srcs = (hero.getAttribute("data-srcs") || "").split("|").filter(Boolean);
+      window.URM?.loadImage?.(hero, srcs);
+    }
+
     // DB quick links (skills + tuning)
     const dbQuick = $("#dbQuick");
     if (dbQuick) {
@@ -216,54 +223,26 @@
       const charId = assets?.baseToUrmId?.[base.id];
       const charUrl = charId ? `${dbBase}/character/${charId}` : `${dbBase}/characters`;
       dbQuick.innerHTML = `
-        <strong>Skills & tuning (DB)</strong>
+        <strong>Infos (DB) — skills, dégâts, tuning</strong>
         <div class="small" style="margin-top:6px">
-          Ouvre la fiche DB pour voir toutes les skills, les images de tuning, et les valeurs par niveau.
+          Tout reste <strong>sur ton site</strong> : l’info est affichée dans un panneau intégré (aucune redirection).
+          <span style="opacity:.8">Source : UltraRumble Database.</span>
         </div>
         <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:10px">
-          <a class="btn secondary" id="dbCharPage" href="${escapeHtml(charUrl)}" target="_blank" rel="noopener">Fiche DB</a>
-          <a class="btn ghost" href="${dbBase}/tuning" target="_blank" rel="noopener">T.U.N.I.N.G</a>
-          <button class="btn ghost" type="button" id="dbEmbedBtn">Aperçu ici</button>
+          <button class="btn secondary" type="button" id="dbEmbedBtn">Ouvrir la DB ici</button>
+          <a class="btn ghost" href="${prefix}tuning/index.html">T.U.N.I.N.G</a>
+          <a class="btn ghost" id="dbCharPage" href="${escapeHtml(charUrl)}" target="_blank" rel="noopener">Source DB</a>
         </div>
-        <div id="dbEmbedWrap" style="display:none; margin-top:12px">
-          <div class="iframeShell" style="min-height:420px">
-            <iframe id="dbCharFrame" title="UltraRumble DB — personnage" loading="lazy" referrerpolicy="no-referrer"></iframe>
-            <div class="iframeFallback" id="dbCharFallback">
-              <div class="panel stack">
-                <div class="kicker">Embed bloqué</div>
-                <div class="small">Clique “Fiche DB” pour l’ouvrir en plein écran.</div>
-                <a class="btn secondary" href="${escapeHtml(charUrl)}" target="_blank" rel="noopener">Fiche DB</a>
-              </div>
-            </div>
-          </div>
+        <div class="small" style="margin-top:8px; opacity:.9">
+          Astuce : sur la DB tu as les images, les tables de dégâts, les valeurs par niveau, et les tuning skills.
         </div>
       `;
-
       const btn = $("#dbEmbedBtn", dbQuick);
-      const wrap = $("#dbEmbedWrap", dbQuick);
-      const frame = $("#dbCharFrame", dbQuick);
-      const fb = $("#dbCharFallback", dbQuick);
       const pageLink = $("#dbCharPage", dbQuick);
 
       btn?.addEventListener("click", () => {
-        const open = wrap.style.display !== "none";
-        wrap.style.display = open ? "none" : "block";
-        btn.textContent = open ? "Aperçu ici" : "Masquer l’aperçu";
-
-        if (!open && frame && !frame.src) {
-          frame.src = pageLink?.href || charUrl;
-          setTimeout(() => {
-            try {
-              const doc = frame.contentDocument;
-              const href = doc?.location?.href || "";
-              if (href === "about:blank") {
-                if (fb) fb.style.display = "flex";
-              }
-            } catch (e) {
-              // Cross-origin => loaded
-            }
-          }, 1800);
-        }
+        const url = pageLink?.href || charUrl;
+        window.URM?.modal?.open({ title: `${base.name} — DB`, url });
       });
     }
 
@@ -303,18 +282,25 @@
     if (!build){
       tuningBox.innerHTML = `
         <div class="notice">
-          <strong>Build indisponible (à remplir).</strong>
+          <strong>Build recommandé : bientôt (DB disponible).</strong>
           <div class="small" style="margin-top:8px">
-            Ajoute un fichier :
-            <div class="mono" style="margin-top:6px">${escapeHtml(`assets/data/tuning/${variant.id}.json`)}</div>
-            en copiant le modèle <a href="${prefix}assets/data/tuning/example.json" target="_blank" rel="noopener">example.json</a>.
+            Pour l’instant, ce site te donne les <strong>skills</strong>, les <strong>valeurs</strong> et les <strong>tuning skills</strong> via la base de données.
+            Quand tu voudras publier TES builds, tu pourras les ajouter en JSON (optionnel).
           </div>
           <div style="margin-top:10px; display:flex; gap:10px; flex-wrap:wrap;">
-            <a class="btn secondary" href="${prefix}tuning/index.html">Voir le générateur</a>
-            <a class="btn ghost" href="${prefix}resources/index.html">Rejoindre la commu</a>
+            <button class="btn secondary" type="button" id="openDbFromBuild">Voir la DB (skills & dégâts)</button>
+            <a class="btn ghost" href="${prefix}tuning/index.html">Voir le tuning (DB)</a>
           </div>
         </div>
       `;
+      const openBtn = $("#openDbFromBuild");
+      if (openBtn) {
+        const assets = window.URM?.assets;
+        const dbBase = "https://fr.ultrarumble.com";
+        const charId = assets?.baseToUrmId?.[base.id];
+        const charUrl = charId ? `${dbBase}/character/${charId}` : `${dbBase}/characters`;
+        openBtn.addEventListener("click", () => window.URM?.modal?.open({ title: `${base.name} — DB`, url: charUrl }));
+      }
       hookTabs(prefix);
       return;
     }

@@ -14,7 +14,7 @@
 
     const assets = window.URM?.assets;
     const baseToUrmId = assets?.baseToUrmId || {};
-    const charaUrl = assets?.charaImageUrl;
+    const cand = assets?.charaImageCandidates;
 
     list.innerHTML = bases
       .map((b) => {
@@ -22,9 +22,8 @@
         const count = b.variants.length;
 
         const urmId = baseToUrmId[b.id];
-        const img = (urmId && typeof charaUrl === "function")
-          ? `<img src="${escapeHtml(charaUrl(urmId))}" alt="" loading="lazy" decoding="async"
-                onerror="this.remove()">`
+        const img = (urmId && typeof cand === "function")
+          ? `<img data-urm-img="1" data-srcs="${escapeHtml(cand(urmId).join('|'))}" alt="" loading="lazy" decoding="async">`
           : "";
 
         return `
@@ -53,6 +52,12 @@
       .join("");
 
     $("#rosterCount").textContent = `${bases.length} personnage${bases.length > 1 ? "s" : ""}`;
+
+    // Load images (try multiple candidate URLs)
+    $$('img[data-urm-img="1"]', list).forEach((imgEl) => {
+      const srcs = (imgEl.getAttribute('data-srcs') || '').split('|').filter(Boolean);
+      window.URM?.loadImage?.(imgEl, srcs);
+    });
 
     $$("button[data-base]", list).forEach((btn) => {
       btn.addEventListener("click", async () => {
